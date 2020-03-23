@@ -89,7 +89,7 @@ virtualenv==16.0.0
 virtualenv-clone==0.5.3
 virtualenvwrapper-win==1.2.5
 w3lib==1.19.0
-Werkzeug==0.14.1
+Werkzeug==0.15.3
 whitenoise==3.3.1
 xlrd==1.2.0
 xmltodict==0.12.0
