@@ -16,7 +16,7 @@ cycler==0.10.0
 dataclasses==0.6
 demjson==2.2.4
 dialogflow==0.5.2
-Django==2.1
+Django==2.2.10
 django-braces==1.13.0
 django-mongodb-engine==0.6.0
 django-mongodb-engine-py3==0.6.0.1
