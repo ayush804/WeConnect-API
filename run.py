@@ -5,8 +5,7 @@ def create_app(config_filename):
     application = Flask(__name__)
     application.config.from_object(config_filename)
 
-    from app import api_bp
-    application.register_blueprint(api_bp, url_prefix='/api')
+    application.register_blueprint(Blueprint('api', __name__), url_prefix='/api')
 
     from model import db
     db.init_app(application)
@@ -14,6 +13,6 @@ def create_app(config_filename):
     return application
 
 
-#if __name__ == "__main__":
-application = create_app("config")
-application.run(debug=True)
+if __name__ == "__main__":
+    application = create_app("config")
+    application.run()
