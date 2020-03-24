@@ -1,6 +1,8 @@
 from flask_restful import Resource
 from flask import request
 from model import db, WeConnect_Users
+from flask_api import status
+
 
 class Register(Resource):
     def post(self):
@@ -10,9 +12,9 @@ class Register(Resource):
 
         emailId = json_data['emailId']
         password = json_data['password']
-        sex = json_data['sex']
-        dob = json_data['date']
-        name = json_data['name']
+        #sex = json_data['sex']
+        #dob = json_data['date']
+        #name = json_data['name']
         #query = "INSERT INTO WeConnect_Users (emailId, password, name, sex, dob) VALUES (" + emailId + "," + password + "," + name + "," + sex + "," + dob + ")"
         db.create_all()
         db.session.commit()
@@ -20,4 +22,4 @@ class Register(Resource):
         user = WeConnect_Users(emailId, password)
         db.session.add(user)
         db.session.commit()
-        return {"message": "Registered"}
+        return {"message": status.HTTP_201_CREATED}
