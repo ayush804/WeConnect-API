@@ -1,1 +1,1 @@
-web gunicorn run:We-Connect
+web: python api/run.py
