@@ -1,0 +1,6 @@
+projectKey=my:weconnect
+serverUrl=http://localhost:9000
+serverVersion=7.8.0.26217
+dashboardUrl=http://localhost:9000/dashboard?id=my%3Aweconnect
+ceTaskId=AXENTn3mVu_o-XlGHUHM
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXENTn3mVu_o-XlGHUHM
