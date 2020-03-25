@@ -32,3 +32,13 @@ class VerificationStatus(db.Model):
     def __init__(self, email_id, verification_key):
         self.emailId = email_id
         self.verificationKey = verification_key
+
+
+class ForgotPasswordStatus(db.Model):
+    __tablename__ = 'ForgotPasswordStatus'
+    emailId = db.Column(db.String(250), primary_key=True)
+    otp = db.Column(db.String(250))
+
+    def __init__(self, email_id, otp):
+        self.emailId = email_id
+        self.otp = otp

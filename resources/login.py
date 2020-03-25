@@ -29,7 +29,7 @@ class Login(Resource):
                     user = db.session().query(WeConnectUsers).filter_by(emailId=email_id).first()
                     if user.__dict__["password"] == password:
                         token = create_access_token(identity=email_id)
-                        return {"message": token}, 200
+                        return {"message": token, "isVerified" : user.__dict__["isVerified"]}, 200
                     else:
                         return {"message" : "Incorrect Password"}
                 else:

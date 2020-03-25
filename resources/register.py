@@ -1,11 +1,9 @@
 import hashlib
-import os
 import random
 import string
 
 from flask_restful import Resource
 from flask import request
-from sendgrid import sendgrid, From, To, Content, Mail
 
 from model import db, WeConnectUsers, VerificationStatus
 import re
@@ -47,16 +45,6 @@ class Register(Resource):
             key = VerificationStatus(email_id, verification_key)
             db.session.add(key)
             db.session.commit()
-            sg = sendgrid.SendGridAPIClient(os.environ.get("SENDGRID_API_KEY"))
-            from_email = From("ayush804@gmail.com")
-            subject = "Verify your email : WeConnect "
-            to_email = To(email_id)
-            content = Content("text/plain", verification_key)
-            mail = Mail(from_email, to_email, subject, content)
-            response = sg.send(mail)
-            print(response.status_code)
-            print(response.body)
-            print(response.headers)
             return {"message": "User Created"}, 201
         else:
             return {"message" : "Email id is not in valid format"}
