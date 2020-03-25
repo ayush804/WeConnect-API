@@ -1,6 +1,6 @@
 import hashlib
 import os
-import secrets
+import random
 import string
 
 from flask_restful import Resource
@@ -41,7 +41,7 @@ class Register(Resource):
                 db.create_all()
                 user = WeConnect_Users(emailId, password, sex, dob, name)
                 db.session.add(user)
-                verificationKey = ''.join(secrets.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(50))
+                verificationKey = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(50))
                 db.create_all()
                 key = verificationStatus(emailId, verificationKey)
                 db.session.add(key)
