@@ -11,6 +11,7 @@ db.init_app(application)
 application.config['SECRET_KEY'] = 'super-secret'
 jwt = JWTManager(application)
 
+
 def create_app(config_filename):
     global application
     return application

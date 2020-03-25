@@ -3,7 +3,7 @@ import hashlib
 from flask_jwt_extended import create_access_token
 from flask_restful import Resource
 from flask import request
-from model import db, WeConnect_Users
+from model import db, WeConnectUsers
 import re
 
 
@@ -15,7 +15,7 @@ class Login(Resource):
             if not json_data:
                 return {"message": "No input data provided"}, 400
             if "emailId" in json_data:
-                emailId = json_data["emailId"]
+                email_id = json_data["emailId"]
             else:
                 return {"message": "Missing Email id"}, 422
             if "password" in json_data:
@@ -24,11 +24,11 @@ class Login(Resource):
                 password = password.hexdigest()
             else:
                 return {"message": "Missing Password"}
-            if re.search(regex, emailId):
-                if db.session().query(WeConnect_Users).filter_by(emailId=emailId).first():
-                    user = db.session().query(WeConnect_Users).filter_by(emailId=emailId).first()
+            if re.search(regex, email_id):
+                if db.session().query(WeConnectUsers).filter_by(emailId=email_id).first():
+                    user = db.session().query(WeConnectUsers).filter_by(emailId=email_id).first()
                     if user.__dict__["password"] == password:
-                        token = create_access_token(identity=emailId)
+                        token = create_access_token(identity=email_id)
                         return {"message": token}, 200
                     else:
                         return {"message" : "Incorrect Password"}
