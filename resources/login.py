@@ -1,3 +1,5 @@
+import hashlib
+
 from flask_jwt_extended import create_access_token
 from flask_restful import Resource
 from flask import request
@@ -18,6 +20,8 @@ class Login(Resource):
                 return {"message": "Missing Email id"}, 422
             if "password" in json_data:
                 password = json_data['password']
+                password = hashlib.md5(password.encode())
+                password = password.hexdigest()
             else:
                 return {"message": "Missing Password"}
             if re.search(regex, emailId):
