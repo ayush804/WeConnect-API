@@ -1,7 +1,6 @@
 import hashlib
 import os
 import secrets
-import ssl
 import string
 
 from flask_restful import Resource
@@ -37,18 +36,15 @@ class Register(Resource):
             if "name" in json_data:
                 name = json_data['name']
             if re.search(regex, emailId):
-                '''if db.session().query(WeConnect_Users).filter_by(emailId=emailId).first():
+                if db.session().query(WeConnect_Users).filter_by(emailId=emailId).first():
                     return {"message" : "User already exist"}, 409
                 db.create_all()
-                db.session.commit()
                 user = WeConnect_Users(emailId, password, sex, dob, name)
                 db.session.add(user)
-                db.session.commit()'''
                 verificationKey = ''.join(secrets.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for _ in range(50))
                 db.create_all()
-                db.session.commit()
-                user = verificationStatus(emailId, verificationKey)
-                db.session.add(user)
+                key = verificationStatus(emailId, verificationKey)
+                db.session.add(key)
                 db.session.commit()
                 sg = sendgrid.SendGridAPIClient(os.environ.get("SENDGRID_API_KEY"))
                 from_email = From("ayush804@gmail.com")
