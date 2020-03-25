@@ -1,3 +1,6 @@
+import hashlib
+import os
+
 from flask_restful import Resource
 from flask import request
 from model import db, WeConnect_Users
@@ -18,6 +21,15 @@ class Register(Resource):
                 return {"message" : "Missing Email id"}, 422
             if "password" in json_data:
                 password = json_data['password']
+                salt = os.urandom(32)
+                key = hashlib.pbkdf2_hmac(
+                    'sha256',
+                    password.encode('utf-8'),
+                    salt,
+                    100000,
+                    dklen=128
+                )
+                password = key
             else:
                 return {"response": "Missing Password"}
             if "sex" in json_data:
