@@ -1,5 +1,4 @@
 import hashlib
-
 from flask_jwt_extended import create_access_token
 from flask_restful import Resource
 from flask import request
@@ -8,6 +7,7 @@ import re
 
 
 class Login(Resource):
+    @staticmethod
     def post(self):
         regex = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
         try:
@@ -23,7 +23,7 @@ class Login(Resource):
                 password = hashlib.md5(password.encode())
                 password = password.hexdigest()
             else:
-                return {"message": "Missing Password"}
+                return {"message": "Missing Password"}, 422
             if re.search(regex, email_id):
                 if db.session().query(WeConnectUsers).filter_by(emailId=email_id).first():
                     user = db.session().query(WeConnectUsers).filter_by(emailId=email_id).first()
@@ -31,7 +31,7 @@ class Login(Resource):
                         token = create_access_token(identity=email_id)
                         return {"message": token, "isVerified" : user.__dict__["isVerified"]}, 200
                     else:
-                        return {"message" : "Incorrect Password"}
+                        return {"message" : "Incorrect Password"}, 422
                 else:
                     return {"message" : "Email id not registered"}, 401
             else:
