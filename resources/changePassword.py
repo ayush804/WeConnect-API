@@ -6,7 +6,7 @@ from model import ForgotPasswordStatus, db, WeConnectUsers
 
 class ChangePassword(Resource):
     @staticmethod
-    def change_password(self, email_id, json):
+    def change_password(email_id, json):
         user = db.session().query(WeConnectUsers).filter_by(emailId=email_id).first()
         old_password = json["oldPassword"]
         old_password = hashlib.md5(old_password.encode())
@@ -22,7 +22,7 @@ class ChangePassword(Resource):
             db.session().commit()
 
     @staticmethod
-    def reset_password(self, email_id, json):
+    def reset_password(email_id, json):
         user = db.session().query(WeConnectUsers).filter_by(emailId=email_id).first()
         password = json["newPassword"]
         new_password = hashlib.md5(password.encode())
