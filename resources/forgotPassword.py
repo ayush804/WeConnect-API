@@ -12,7 +12,7 @@ from model import db, ForgotPasswordStatus, WeConnectUsers
 
 class ForgotPassword(Resource):
     def get(self):
-        try:
+        #try:
             email_id = request.args["email"]
             if db.session().query(WeConnectUsers).filter_by(emailId=email_id).first():
                 if db.session().query(ForgotPasswordStatus).filter_by(emailId=email_id).first():
@@ -39,5 +39,5 @@ class ForgotPassword(Resource):
                 return {"message" : "Otp Sent"}, 200
             else:
                 return {"message" : "Email id not registered"}, 409
-        except:
-            return {"message" : "Something went wromg"}, 500
+        #except:
+         #   return {"message" : "Something went wromg"}, 500
