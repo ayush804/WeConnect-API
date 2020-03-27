@@ -13,7 +13,7 @@ import re
 class Register(Resource):
     @staticmethod
     def post():
-        try:
+        #try:
             regex = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
             json_data = request.get_json(force=True)
             sex, name="", ""
@@ -65,5 +65,5 @@ class Register(Resource):
                 return {"message": "User Created"}, 201
             else:
                 return {"message" : "Email id is not in valid format"}, 422
-        except:
-            return {"message" : "Something went wrong"}, 500
+        #except:
+            #return {"message" : "Something went wrong"}, 500
