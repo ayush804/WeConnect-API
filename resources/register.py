@@ -12,7 +12,7 @@ import re
 
 class Register(Resource):
     @staticmethod
-    def post(self):
+    def post():
         try:
             regex = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
             json_data = request.get_json(force=True)

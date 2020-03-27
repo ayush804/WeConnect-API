@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask_restful import Api
+
 from resources.changePassword import ChangePassword
 from resources.forgotPassword import ForgotPassword
 from resources.login import Login

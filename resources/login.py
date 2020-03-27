@@ -8,7 +8,7 @@ import re
 
 class Login(Resource):
     @staticmethod
-    def post(self):
+    def post():
         regex = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
         try:
             json_data = request.get_json(force=True)

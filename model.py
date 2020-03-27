@@ -7,7 +7,7 @@ db = SQLAlchemy()
 
 
 class WeConnectUsers(db.Model):
-    __tablename__ = 'WeConnect_Users'
+    __tablename__ = 'WeConnectUsers'
     emailId = db.Column(db.String(250), primary_key=True)
     password = db.Column(db.String(250), nullable=False)
     creation_date = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp(), nullable=False)
@@ -42,3 +42,17 @@ class ForgotPasswordStatus(db.Model):
     def __init__(self, email_id, otp):
         self.emailId = email_id
         self.otp = otp
+
+
+class WeConnectPosts(db.Model):
+    __tablename__ = 'WeConnectPosts'
+    postId = db.Column(db.Integer, primary_key=True)
+    emailId = db.Column(db.String(250))
+    text = db.Column(db.String(999999))
+    images = db.Column(db.String(999999), primary_key=True)
+    creation_date = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp(), nullable=False)
+
+    def __init__(self, email_id, text, images):
+        self.emailId = email_id
+        self.images = images
+        self.text = text

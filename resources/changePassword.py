@@ -30,7 +30,7 @@ class ChangePassword(Resource):
         user.password = new_password
         db.session().commit()
 
-    def post(self):
+    def post():
         try:
             if "email" in request.args and "otp" in request.args:
                 json_data = request.get_json(force=True)
